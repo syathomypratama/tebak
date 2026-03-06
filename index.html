@@ -45,7 +45,7 @@
 
       body {
         background-image:
-          linear-gradient(rgba(2, 6, 23, 0.68), rgba(2, 6, 23, 0.72)),
+          linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.78)),
           url("bg.jpg");
         background-size: cover;
         background-position: center;
@@ -54,31 +54,99 @@
       }
 
       .glass {
-        background: rgba(255, 255, 255, 0.82);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+      }
+
+      .glass-soft {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .glass-input {
+        background: rgba(255, 255, 255, 0.08) !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        color: #fff !important;
+      }
+
+      .glass-input::placeholder {
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .glass-input:focus {
+        outline: none;
+      }
+
+      .glass-input option {
+        color: #0f172a;
+        background: #ffffff;
+      }
+
+      .history-btn {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .history-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
       }
 
       @media (prefers-color-scheme: dark) {
         .glass {
-          background: rgba(15, 23, 42, 0.72);
+          background: rgba(15, 23, 42, 0.42);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-soft {
+          background: rgba(15, 23, 42, 0.34);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-input {
+          background: rgba(15, 23, 42, 0.34) !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          color: #fff !important;
+        }
+
+        .glass-input::placeholder {
+          color: rgba(226, 232, 240, 0.62);
+        }
+
+        .glass-input option {
+          color: #e2e8f0;
+          background: #0f172a;
+        }
+
+        .history-btn {
+          background: rgba(15, 23, 42, 0.34);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .history-btn:hover {
+          background: rgba(15, 23, 42, 0.46);
         }
       }
     </style>
   </head>
 
-  <body class="h-full text-slate-900 dark:text-slate-100">
+  <body class="h-full text-white">
     <canvas id="confetti"></canvas>
 
     <div class="min-h-full">
-      <header
-        class="sticky top-0 z-10 border-b border-white/10 bg-slate-950/40 backdrop-blur">
-        <div
-          class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+      <header class="sticky top-0 z-10 border-b border-white/10 bg-slate-950/35 backdrop-blur">
+        <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
           <div class="flex items-center gap-3">
             <div
-              class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 grid place-items-center shadow-lg animate-floaty">
-              <span class="text-white font-black text-lg">K</span>
+              class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 shadow-lg animate-floaty">
+              <span class="text-lg font-black text-white">K</span>
             </div>
             <div>
               <h1 class="text-lg font-extrabold leading-tight text-violet-400">
@@ -92,7 +160,7 @@
 
           <button
             id="btnClear"
-            class="text-xs font-semibold px-3 py-2 rounded-xl border border-white/15 bg-white/10 text-white hover:bg-white/15">
+            class="rounded-xl border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-white hover:bg-white/15">
             Reset Riwayat
           </button>
         </div>
@@ -101,65 +169,50 @@
       <main class="mx-auto max-w-5xl px-4 py-8">
         <div class="grid gap-6 md:grid-cols-[1.35fr_.65fr]">
           <!-- Left -->
-          <section
-            class="glass rounded-3xl border border-white/20 p-5 shadow-2xl dark:border-slate-700/70">
-            <h2 class="text-xl font-extrabold text-fuchsia-500">
+          <section class="glass rounded-3xl p-5 shadow-2xl">
+            <h2 class="text-xl font-extrabold text-fuchsia-400">
               Isi dulu Data di form ini
             </h2>
-            <p class="mt-1 text-sm text-slate-700 dark:text-slate-300">
+            <p class="mt-1 text-sm text-white/80">
               Nama, tanggal lahir, dan bulan lahir bakal dipakai buat membaca
-              <span class="font-bold">zodiak + aura kodam</span>.
+              <span class="font-bold text-white">zodiak + aura kodam</span>.
             </p>
 
             <div class="mt-5 grid gap-3 sm:grid-cols-2">
               <div class="sm:col-span-2">
-                <label
-                  class="text-xs font-bold text-slate-700 dark:text-slate-300"
-                  >Nama</label
-                >
+                <label class="text-xs font-bold text-white/90">Nama</label>
                 <input
                   id="nameInput"
                   type="text"
                   placeholder="Contoh: Mulyadi askasiusas"
-                  class="mt-1 w-full rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-950/80 dark:focus:ring-indigo-900" />
+                  class="glass-input mt-1 w-full rounded-2xl px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-fuchsia-400/30" />
               </div>
 
               <div>
-                <label
-                  class="text-xs font-bold text-slate-700 dark:text-slate-300"
-                  >Tanggal Lahir</label
-                >
+                <label class="text-xs font-bold text-white/90">Tanggal Lahir</label>
                 <input
                   id="birthDateInput"
                   type="text"
                   placeholder="Contoh: 17"
-                  class="mt-1 w-full rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-950/80 dark:focus:ring-indigo-900" />
+                  class="glass-input mt-1 w-full rounded-2xl px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-fuchsia-400/30" />
               </div>
 
               <div>
-                <label
-                  class="text-xs font-bold text-slate-700 dark:text-slate-300"
-                  >Bulan Lahir</label
-                >
+                <label class="text-xs font-bold text-white/90">Bulan Lahir</label>
                 <input
                   id="birthMonthInput"
                   type="text"
                   placeholder="Contoh: Agustus"
-                  class="mt-1 w-full rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-950/80 dark:focus:ring-indigo-900" />
+                  class="glass-input mt-1 w-full rounded-2xl px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-fuchsia-400/30" />
               </div>
 
               <div class="sm:w-64">
-                <label
-                  class="text-xs font-bold text-slate-700 dark:text-slate-300"
-                  >Mode</label
-                >
+                <label class="text-xs font-bold text-white/90">Mode</label>
                 <select
                   id="modeSelect"
-                  class="mt-1 w-full rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-950/80 dark:focus:ring-indigo-900">
+                  class="glass-input mt-1 w-full rounded-2xl px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-fuchsia-400/30">
                   <option value="random">Random</option>
-                  <option value="stable">
-                    Stabil (data sama = hasil sama)
-                  </option>
+                  <option value="stable">Stabil (data sama = hasil sama)</option>
                 </select>
               </div>
             </div>
@@ -179,37 +232,26 @@
 
               <button
                 id="btnShare"
-                class="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-extrabold hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-950 dark:hover:bg-slate-900">
+                class="glass-soft inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-extrabold text-white hover:bg-white/10">
                 <span>📤</span> Share
               </button>
 
-              <span
-                id="toast"
-                class="hidden text-xs font-semibold text-slate-700 dark:text-slate-300"></span>
+              <span id="toast" class="hidden text-xs font-semibold text-white/80"></span>
             </div>
 
             <!-- Scanner -->
-            <div
-              id="scanner"
-              class="mt-5 hidden overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800">
-              <div class="p-4 bg-slate-50/90 dark:bg-slate-950/80">
+            <div id="scanner" class="mt-5 hidden overflow-hidden rounded-3xl glass-soft">
+              <div class="p-4">
                 <div class="flex items-center justify-between">
-                  <p class="text-sm font-bold">Memindai aura…</p>
-                  <span
-                    id="scanPct"
-                    class="text-xs font-extrabold text-indigo-600 dark:text-indigo-400"
-                    >0%</span
-                  >
+                  <p class="text-sm font-bold text-white">Memindai aura…</p>
+                  <span id="scanPct" class="text-xs font-extrabold text-indigo-300">0%</span>
                 </div>
-                <div
-                  class="mt-3 h-3 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="mt-3 h-3 overflow-hidden rounded-full bg-white/10">
                   <div
                     id="scanBar"
-                    class="h-full w-0 bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-indigo-600 bg-[length:200%_100%] animate-shimmer"></div>
+                    class="h-full w-0 animate-shimmer bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-indigo-600 bg-[length:200%_100%]"></div>
                 </div>
-                <p
-                  id="scanHint"
-                  class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                <p id="scanHint" class="mt-2 text-xs text-white/65">
                   Jangan gerak… zodiaknya lagi disinkronin.
                 </p>
               </div>
@@ -217,21 +259,16 @@
 
             <!-- Result -->
             <div id="resultWrap" class="mt-5 hidden">
-              <div
-                class="rounded-3xl border border-indigo-200 bg-indigo-50/90 p-5 dark:border-indigo-900/60 dark:bg-indigo-950/30 animate-pop">
+              <div class="glass-soft animate-pop rounded-3xl p-5">
                 <div class="flex items-start justify-between gap-3">
                   <div>
-                    <p
-                      class="text-xs font-black tracking-wide text-indigo-700 dark:text-indigo-300">
+                    <p class="text-xs font-black tracking-wide text-indigo-300">
                       HASIL KODAM KAMU ADALAH
                     </p>
-                    <h3 id="resultTitle" class="mt-1 text-2xl font-black"></h3>
-                    <p
-                      id="resultSub"
-                      class="mt-1 text-sm text-slate-700 dark:text-slate-200"></p>
+                    <h3 id="resultTitle" class="mt-1 text-2xl font-black text-white"></h3>
+                    <p id="resultSub" class="mt-1 text-sm text-white/80"></p>
                   </div>
-                  <div
-                    class="rounded-2xl bg-white px-3 py-2 text-sm font-black text-slate-900 shadow-sm dark:bg-slate-900 dark:text-slate-50">
+                  <div class="glass-soft rounded-2xl px-3 py-2 text-sm font-black text-white shadow-sm">
                     <span id="resultLevel">Lv. ?</span>
                   </div>
                 </div>
@@ -239,63 +276,45 @@
                 <div class="mt-3 flex flex-wrap gap-2">
                   <span
                     id="resultBirth"
-                    class="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700 shadow-sm dark:bg-slate-900 dark:text-slate-200"></span>
+                    class="glass-soft rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm"></span>
                   <span
                     id="resultZodiac"
-                    class="rounded-full bg-fuchsia-100 px-3 py-1 text-xs font-bold text-fuchsia-700 shadow-sm dark:bg-fuchsia-950/50 dark:text-fuchsia-200"></span>
+                    class="glass-soft rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm"></span>
                   <span
                     id="resultElement"
-                    class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-700 shadow-sm dark:bg-indigo-950/50 dark:text-indigo-200"></span>
+                    class="glass-soft rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm"></span>
                 </div>
 
                 <div class="mt-4 grid gap-3 sm:grid-cols-2">
-                  <div
-                    class="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                    <p
-                      class="text-xs font-black text-slate-500 dark:text-slate-400">
-                      Keunggulan
-                    </p>
-                    <p id="resultPower" class="mt-1 text-sm font-semibold"></p>
+                  <div class="glass-soft rounded-2xl p-4">
+                    <p class="text-xs font-black text-white/60">Keunggulan</p>
+                    <p id="resultPower" class="mt-1 text-sm font-semibold text-white"></p>
                   </div>
-                  <div
-                    class="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                    <p
-                      class="text-xs font-black text-slate-500 dark:text-slate-400">
-                      Pantangan
-                    </p>
-                    <p id="resultWeak" class="mt-1 text-sm font-semibold"></p>
+                  <div class="glass-soft rounded-2xl p-4">
+                    <p class="text-xs font-black text-white/60">Pantangan</p>
+                    <p id="resultWeak" class="mt-1 text-sm font-semibold text-white"></p>
                   </div>
                 </div>
 
-                <div
-                  class="mt-4 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                  <p
-                    class="text-xs font-black text-slate-500 dark:text-slate-400">
-                    Vibe Zodiak
-                  </p>
-                  <p id="resultVibe" class="mt-1 text-sm font-semibold"></p>
+                <div class="glass-soft mt-4 rounded-2xl p-4">
+                  <p class="text-xs font-black text-white/60">Vibe Zodiak</p>
+                  <p id="resultVibe" class="mt-1 text-sm font-semibold text-white"></p>
                 </div>
 
-                <p
-                  id="resultNote"
-                  class="mt-4 text-xs text-slate-600 dark:text-slate-300"></p>
+                <p id="resultNote" class="mt-4 text-xs text-white/70"></p>
               </div>
             </div>
           </section>
 
           <!-- Right -->
-          <aside
-            class="glass rounded-3xl border border-white/20 p-5 shadow-2xl dark:border-slate-700/70">
+          <aside class="glass rounded-3xl p-5 shadow-2xl">
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-extrabold">Riwayat</h3>
-              <span class="text-xs text-slate-500 dark:text-slate-400"
-                >maks 10</span
-              >
+              <h3 class="text-base font-extrabold text-white">Riwayat</h3>
+              <span class="text-xs text-white/60">maks 10</span>
             </div>
             <div id="historyList" class="mt-4 space-y-3"></div>
 
-            <div
-              class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
+            <div class="glass-soft mt-5 rounded-2xl p-4 text-xs text-white/70">
               Tips: klik riwayat untuk menampilkan hasil lagi.
             </div>
           </aside>
@@ -308,142 +327,29 @@
     </div>
 
     <script>
-      // =========================
-      // DATA KODAM
-      // =========================
       const KODAM = [
-        {
-          name: "Supra Toyib",
-          power: "Ngebut saat deadline mepet",
-          weak: "Kehabisan WiFi",
-          vibe: "Tenang… tapi kalau udah gas susah direm.",
-        },
-        {
-          name: "Casan Samsung",
-          power: "Insting tajam baca situasi",
-          weak: "Baper kalau dicuekin",
-          vibe: "Kelihatannya santai, padahal detail banget.",
-        },
-        {
-          name: "Sapi Laper",
-          power: "Jago ngelamun tengah malam",
-          weak: "Pagi jadi zombi",
-          vibe: "Produktif kalau suasana sepi dan playlist pas.",
-        },
-        {
-          name: "Satpam Perumahan",
-          power: "Cepat nangkep peluang",
-          weak: "Overthinking notifikasi",
-          vibe: "Adaptif banget, tapi fokus suka diuji.",
-        },
-        {
-          name: "Buntut Tirex",
-          power: "Kerja diam-diam hasilnya nendang",
-          weak: "Mager presentasi",
-          vibe: "Lebih suka buktiin lewat hasil.",
-        },
-        {
-          name: "Brimob",
-          power: "Tahan banting, kuat mental",
-          weak: "Susah minta bantuan",
-          vibe: "Keras ke diri sendiri—coba lebih lembut ya.",
-        },
-        {
-          name: "Bank Plecit",
-          power: "Pinter ngatur duit",
-          weak: "Kalap flash sale",
-          vibe: "Hemat… sampai ada promo 11.11.",
-        },
-        {
-          name: "Lelaki Garut berusia 70",
-          power: "Selalu survive kondisi apapun",
-          weak: "Mood naik turun",
-          vibe: "Fleksibel, serba bisa.",
-        },
-        {
-          name: "Kucing Anggora",
-          power: "Chill level dewa",
-          weak: "Tombol snooze",
-          vibe: "Auto full kalau istirahat bener.",
-        },
-        {
-          name: "Mercon Disko",
-          power: "Sabar tapi sekali meledak…",
-          weak: "Orang PHP",
-          vibe: "Tahan lama, tapi jangan dipancing 😄",
-        },
-        {
-          name: "Intel Nyamar",
-          power: "Cepat beresin hal kecil",
-          weak: "Suka lupa hal besar",
-          vibe: "Checklist kamu panjang tapi selalu kelar.",
-        },
-        {
-          name: "Lampu Jupiter MX",
-          power: "Visi jauh ke depan",
-          weak: "Gampang bosan",
-          vibe: "Kalau udah tertarik, kamu all-in.",
-        },
-        {
-          name: "Harimau Gendut",
-          power: "Punya wibawa natural",
-          weak: "Caper itu alergi",
-          vibe: "Aura kamu bikin orang segan.",
-        },
-        {
-          name: "Kotak Pensil",
-          power: "Tampilan rapi, kerja rapi",
-          weak: "Perfeksionis",
-          vibe: "Kalau rapi rasanya hati ikut damai.",
-        },
-        {
-          name: "Erwin Torres",
-          power: "Energi meledak-ledak",
-          weak: "Burnout kalau kebanyakan",
-          vibe: "Gas terus, tapi inget rem.",
-        },
-        {
-          name: "Ular Kadut",
-          power: "Santai tapi licin (strategis)",
-          weak: "Susah ditebak",
-          vibe: "Kamu pintar milih timing.",
-        },
-        {
-          name: "Headset Kabel",
-          power: "Ngangkat mood tim",
-          weak: "Capek jadi penghibur",
-          vibe: "Kamu bikin suasana hidup.",
-        },
-        {
-          name: "Guru Penjas",
-          power: "Ide kreatif nggak habis",
-          weak: "Susah eksekusi",
-          vibe: "Ide bagus butuh step kecil biar jadi nyata.",
-        },
-        {
-          name: "Helm Bogo",
-          power: "Melindungi orang terdekat",
-          weak: "Overprotektif",
-          vibe: "Kalau sayang, kamu total.",
-        },
-        {
-          name: "Speaker Masjid",
-          power: "Jago ngomong & deal",
-          weak: "Kebanyakan mikir",
-          vibe: "Kamu bisa win-win kalau mood bagus.",
-        },
-        {
-          name: "Kades Ngantuk",
-          power: "Pegang banyak hal sekaligus",
-          weak: "Suka kebagi fokus",
-          vibe: "Kuat, tapi perlu prioritas.",
-        },
-        {
-          name: "Jam Warteg",
-          power: "Cepat bangun kesadaran",
-          weak: "Cemas kebanyakan",
-          vibe: "Kamu peka—bagus, asal nggak kebablasan.",
-        },
+        { name: "Supra Toyib", power: "Ngebut saat deadline mepet", weak: "Kehabisan WiFi", vibe: "Tenang… tapi kalau udah gas susah direm." },
+        { name: "Casan Samsung", power: "Insting tajam baca situasi", weak: "Baper kalau dicuekin", vibe: "Kelihatannya santai, padahal detail banget." },
+        { name: "Sapi Laper", power: "Jago ngelamun tengah malam", weak: "Pagi jadi zombi", vibe: "Produktif kalau suasana sepi dan playlist pas." },
+        { name: "Satpam Perumahan", power: "Cepat nangkep peluang", weak: "Overthinking notifikasi", vibe: "Adaptif banget, tapi fokus suka diuji." },
+        { name: "Buntut Tirex", power: "Kerja diam-diam hasilnya nendang", weak: "Mager presentasi", vibe: "Lebih suka buktiin lewat hasil." },
+        { name: "Brimob", power: "Tahan banting, kuat mental", weak: "Susah minta bantuan", vibe: "Keras ke diri sendiri—coba lebih lembut ya." },
+        { name: "Bank Plecit", power: "Pinter ngatur duit", weak: "Kalap flash sale", vibe: "Hemat… sampai ada promo 11.11." },
+        { name: "Lelaki Garut berusia 70", power: "Selalu survive kondisi apapun", weak: "Mood naik turun", vibe: "Fleksibel, serba bisa." },
+        { name: "Kucing Anggora", power: "Chill level dewa", weak: "Tombol snooze", vibe: "Auto full kalau istirahat bener." },
+        { name: "Mercon Disko", power: "Sabar tapi sekali meledak…", weak: "Orang PHP", vibe: "Tahan lama, tapi jangan dipancing 😄" },
+        { name: "Intel Nyamar", power: "Cepat beresin hal kecil", weak: "Suka lupa hal besar", vibe: "Checklist kamu panjang tapi selalu kelar." },
+        { name: "Lampu Jupiter MX", power: "Visi jauh ke depan", weak: "Gampang bosan", vibe: "Kalau udah tertarik, kamu all-in." },
+        { name: "Harimau Gendut", power: "Punya wibawa natural", weak: "Caper itu alergi", vibe: "Aura kamu bikin orang segan." },
+        { name: "Kotak Pensil", power: "Tampilan rapi, kerja rapi", weak: "Perfeksionis", vibe: "Kalau rapi rasanya hati ikut damai." },
+        { name: "Erwin Torres", power: "Energi meledak-ledak", weak: "Burnout kalau kebanyakan", vibe: "Gas terus, tapi inget rem." },
+        { name: "Ular Kadut", power: "Santai tapi licin (strategis)", weak: "Susah ditebak", vibe: "Kamu pintar milih timing." },
+        { name: "Headset Kabel", power: "Ngangkat mood tim", weak: "Capek jadi penghibur", vibe: "Kamu bikin suasana hidup." },
+        { name: "Guru Penjas", power: "Ide kreatif nggak habis", weak: "Susah eksekusi", vibe: "Ide bagus butuh step kecil biar jadi nyata." },
+        { name: "Helm Bogo", power: "Melindungi orang terdekat", weak: "Overprotektif", vibe: "Kalau sayang, kamu total." },
+        { name: "Speaker Masjid", power: "Jago ngomong & deal", weak: "Kebanyakan mikir", vibe: "Kamu bisa win-win kalau mood bagus." },
+        { name: "Kades Ngantuk", power: "Pegang banyak hal sekaligus", weak: "Suka kebagi fokus", vibe: "Kuat, tapi perlu prioritas." },
+        { name: "Jam Warteg", power: "Cepat bangun kesadaran", weak: "Cemas kebanyakan", vibe: "Kamu peka—bagus, asal nggak kebablasan." },
       ];
 
       const LEVELS = [
@@ -455,114 +361,18 @@
       ];
 
       const ZODIACS = [
-        {
-          name: "Capricorn",
-          start: [12, 22],
-          end: [1, 19],
-          element: "Bumi",
-          bonusPower: "Disiplin dan tahan banting",
-          bonusWeak: "Terlalu keras ke diri sendiri",
-          vibe: "Kalem, ambisius, dan suka buktiin lewat hasil.",
-        },
-        {
-          name: "Aquarius",
-          start: [1, 20],
-          end: [2, 18],
-          element: "Udara",
-          bonusPower: "Ide nyeleneh tapi jenius",
-          bonusWeak: "Susah ditebak mood-nya",
-          vibe: "Unik, bebas, dan nggak suka dikotakin.",
-        },
-        {
-          name: "Pisces",
-          start: [2, 19],
-          end: [3, 20],
-          element: "Air",
-          bonusPower: "Peka dan imajinatif",
-          bonusWeak: "Gampang kebawa perasaan",
-          vibe: "Lembut, kreatif, dan auranya misterius.",
-        },
-        {
-          name: "Aries",
-          start: [3, 21],
-          end: [4, 19],
-          element: "Api",
-          bonusPower: "Berani mulai duluan",
-          bonusWeak: "Terlalu impulsif",
-          vibe: "Nggak takut gas, penuh energi, dan kompetitif.",
-        },
-        {
-          name: "Taurus",
-          start: [4, 20],
-          end: [5, 20],
-          element: "Bumi",
-          bonusPower: "Konsisten dan solid",
-          bonusWeak: "Keras kepala",
-          vibe: "Tenang, stabil, tapi kalau udah ngotot susah digeser.",
-        },
-        {
-          name: "Gemini",
-          start: [5, 21],
-          end: [6, 20],
-          element: "Udara",
-          bonusPower: "Komunikatif dan cepat nyambung",
-          bonusWeak: "Gampang bosan",
-          vibe: "Ceria, lincah, dan selalu punya topik.",
-        },
-        {
-          name: "Cancer",
-          start: [6, 21],
-          end: [7, 22],
-          element: "Air",
-          bonusPower: "Peduli dan protektif",
-          bonusWeak: "Terlalu dipendam",
-          vibe: "Hangat, setia, dan perasa banget.",
-        },
-        {
-          name: "Leo",
-          start: [7, 23],
-          end: [8, 22],
-          element: "Api",
-          bonusPower: "Karismatik dan pede",
-          bonusWeak: "Gengsi tinggi",
-          vibe: "Dominan, cerah, dan suka jadi pusat aura.",
-        },
-        {
-          name: "Virgo",
-          start: [8, 23],
-          end: [9, 22],
-          element: "Bumi",
-          bonusPower: "Rapi, detail, dan teliti",
-          bonusWeak: "Overthinking hal kecil",
-          vibe: "Perfeksionis, logis, dan suka semuanya tertata.",
-        },
-        {
-          name: "Libra",
-          start: [9, 23],
-          end: [10, 22],
-          element: "Udara",
-          bonusPower: "Jago cari titik tengah",
-          bonusWeak: "Sering bingung milih",
-          vibe: "Elegan, sosial, dan pengen semuanya seimbang.",
-        },
-        {
-          name: "Scorpio",
-          start: [10, 23],
-          end: [11, 21],
-          element: "Air",
-          bonusPower: "Fokus dan intens",
-          bonusWeak: "Susah percaya orang",
-          vibe: "Dalam, tajam, dan susah dibaca.",
-        },
-        {
-          name: "Sagitarius",
-          start: [11, 22],
-          end: [12, 21],
-          element: "Api",
-          bonusPower: "Optimis dan suka eksplor",
-          bonusWeak: "Kurang sabaran",
-          vibe: "Bebas, berani, dan pengen terus berkembang.",
-        },
+        { name: "Capricorn", start: [12, 22], end: [1, 19], element: "Bumi", bonusPower: "Disiplin dan tahan banting", bonusWeak: "Terlalu keras ke diri sendiri", vibe: "Kalem, ambisius, dan suka buktiin lewat hasil." },
+        { name: "Aquarius", start: [1, 20], end: [2, 18], element: "Udara", bonusPower: "Ide nyeleneh tapi jenius", bonusWeak: "Susah ditebak mood-nya", vibe: "Unik, bebas, dan nggak suka dikotakin." },
+        { name: "Pisces", start: [2, 19], end: [3, 20], element: "Air", bonusPower: "Peka dan imajinatif", bonusWeak: "Gampang kebawa perasaan", vibe: "Lembut, kreatif, dan auranya misterius." },
+        { name: "Aries", start: [3, 21], end: [4, 19], element: "Api", bonusPower: "Berani mulai duluan", bonusWeak: "Terlalu impulsif", vibe: "Nggak takut gas, penuh energi, dan kompetitif." },
+        { name: "Taurus", start: [4, 20], end: [5, 20], element: "Bumi", bonusPower: "Konsisten dan solid", bonusWeak: "Keras kepala", vibe: "Tenang, stabil, tapi kalau udah ngotot susah digeser." },
+        { name: "Gemini", start: [5, 21], end: [6, 20], element: "Udara", bonusPower: "Komunikatif dan cepat nyambung", bonusWeak: "Gampang bosan", vibe: "Ceria, lincah, dan selalu punya topik." },
+        { name: "Cancer", start: [6, 21], end: [7, 22], element: "Air", bonusPower: "Peduli dan protektif", bonusWeak: "Terlalu dipendam", vibe: "Hangat, setia, dan perasa banget." },
+        { name: "Leo", start: [7, 23], end: [8, 22], element: "Api", bonusPower: "Karismatik dan pede", bonusWeak: "Gengsi tinggi", vibe: "Dominan, cerah, dan suka jadi pusat aura." },
+        { name: "Virgo", start: [8, 23], end: [9, 22], element: "Bumi", bonusPower: "Rapi, detail, dan teliti", bonusWeak: "Overthinking hal kecil", vibe: "Perfeksionis, logis, dan suka semuanya tertata." },
+        { name: "Libra", start: [9, 23], end: [10, 22], element: "Udara", bonusPower: "Jago cari titik tengah", bonusWeak: "Sering bingung milih", vibe: "Elegan, sosial, dan pengen semuanya seimbang." },
+        { name: "Scorpio", start: [10, 23], end: [11, 21], element: "Air", bonusPower: "Fokus dan intens", bonusWeak: "Susah percaya orang", vibe: "Dalam, tajam, dan susah dibaca." },
+        { name: "Sagitarius", start: [11, 22], end: [12, 21], element: "Api", bonusPower: "Optimis dan suka eksplor", bonusWeak: "Kurang sabaran", vibe: "Bebas, berani, dan pengen terus berkembang." },
       ];
 
       const $ = (id) => document.getElementById(id);
@@ -582,9 +392,7 @@
       }
 
       function normalizeText(str) {
-        return String(str || "")
-          .trim()
-          .toLowerCase();
+        return String(str || "").trim().toLowerCase();
       }
 
       function parseBirthDate(input) {
@@ -598,84 +406,25 @@
         const raw = normalizeText(input);
 
         const monthMap = {
-          1: 1,
-          "01": 1,
-          januari: 1,
-          january: 1,
-          jan: 1,
-          2: 2,
-          "02": 2,
-          februari: 2,
-          february: 2,
-          feb: 2,
-          3: 3,
-          "03": 3,
-          maret: 3,
-          march: 3,
-          mar: 3,
-          4: 4,
-          "04": 4,
-          april: 4,
-          apr: 4,
-          5: 5,
-          "05": 5,
-          mei: 5,
-          may: 5,
-          6: 6,
-          "06": 6,
-          juni: 6,
-          june: 6,
-          jun: 6,
-          7: 7,
-          "07": 7,
-          juli: 7,
-          july: 7,
-          jul: 7,
-          8: 8,
-          "08": 8,
-          agustus: 8,
-          august: 8,
-          agu: 8,
-          ags: 8,
-          9: 9,
-          "09": 9,
-          september: 9,
-          sep: 9,
-          sept: 9,
-          10: 10,
-          oktober: 10,
-          october: 10,
-          okt: 10,
-          oct: 10,
-          11: 11,
-          november: 11,
-          nov: 11,
-          12: 12,
-          desember: 12,
-          december: 12,
-          des: 12,
-          dec: 12,
+          1: 1, "01": 1, januari: 1, january: 1, jan: 1,
+          2: 2, "02": 2, februari: 2, february: 2, feb: 2,
+          3: 3, "03": 3, maret: 3, march: 3, mar: 3,
+          4: 4, "04": 4, april: 4, apr: 4,
+          5: 5, "05": 5, mei: 5, may: 5,
+          6: 6, "06": 6, juni: 6, june: 6, jun: 6,
+          7: 7, "07": 7, juli: 7, july: 7, jul: 7,
+          8: 8, "08": 8, agustus: 8, august: 8, agu: 8, ags: 8,
+          9: 9, "09": 9, september: 9, sep: 9, sept: 9,
+          10: 10, oktober: 10, october: 10, okt: 10, oct: 10,
+          11: 11, november: 11, nov: 11,
+          12: 12, desember: 12, december: 12, des: 12, dec: 12,
         };
 
         return monthMap[raw] ?? null;
       }
 
       function getMonthName(monthNum) {
-        const names = [
-          "",
-          "Januari",
-          "Februari",
-          "Maret",
-          "April",
-          "Mei",
-          "Juni",
-          "Juli",
-          "Agustus",
-          "September",
-          "Oktober",
-          "November",
-          "Desember",
-        ];
+        const names = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         return names[monthNum] || "-";
       }
 
@@ -691,17 +440,11 @@
       }
 
       function getZodiac(day, month) {
-        return (
-          ZODIACS.find((z) =>
-            isBetween(month, day, z.start[0], z.start[1], z.end[0], z.end[1]),
-          ) || ZODIACS[0]
-        );
+        return ZODIACS.find((z) => isBetween(month, day, z.start[0], z.start[1], z.end[0], z.end[1])) || ZODIACS[0];
       }
 
       function levelMeta(level) {
-        return (
-          LEVELS.find((L) => level >= L.min && level <= L.max) || LEVELS[0]
-        );
+        return LEVELS.find((L) => level >= L.min && level <= L.max) || LEVELS[0];
       }
 
       function sleep(ms) {
@@ -709,17 +452,13 @@
       }
 
       function escapeHtml(str) {
-        return String(str).replace(
-          /[&<>"']/g,
-          (m) =>
-            ({
-              "&": "&amp;",
-              "<": "&lt;",
-              ">": "&gt;",
-              '"': "&quot;",
-              "'": "&#039;",
-            })[m],
-        );
+        return String(str).replace(/[&<>"']/g, (m) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        })[m]);
       }
 
       function showToast(msg) {
@@ -778,7 +517,7 @@
 
         if (!items.length) {
           list.innerHTML = `
-            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
+            <div class="glass-soft rounded-2xl p-4 text-sm text-white/75">
               Belum ada riwayat. Coba tebak dulu ✨
             </div>`;
           return;
@@ -786,20 +525,19 @@
 
         for (const it of items) {
           const el = document.createElement("button");
-          el.className =
-            "w-full text-left rounded-2xl border border-slate-200 bg-white p-4 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900";
+          el.className = "history-btn w-full rounded-2xl p-4 text-left";
           el.innerHTML = `
             <div class="flex items-start justify-between gap-3">
               <div class="min-w-0">
-                <p class="text-sm font-extrabold truncate">${escapeHtml(it.name)}</p>
-                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 truncate">${escapeHtml(it.birthLabel)} • ${escapeHtml(it.zodiacName)}</p>
-                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 truncate">${escapeHtml(it.kodamName)}</p>
+                <p class="truncate text-sm font-extrabold text-white">${escapeHtml(it.name)}</p>
+                <p class="mt-1 truncate text-xs text-white/60">${escapeHtml(it.birthLabel)} • ${escapeHtml(it.zodiacName)}</p>
+                <p class="mt-1 truncate text-xs text-white/60">${escapeHtml(it.kodamName)}</p>
               </div>
-              <div class="shrink-0 text-xs font-black px-2.5 py-1 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+              <div class="glass-soft shrink-0 rounded-xl px-2.5 py-1 text-xs font-black text-white">
                 ${it.levelLabel}
               </div>
             </div>
-            <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 line-clamp-2">${escapeHtml(it.vibe)}</p>
+            <p class="mt-2 line-clamp-2 text-xs text-white/70">${escapeHtml(it.vibe)}</p>
           `;
           el.addEventListener("click", () => fillResult(it, false));
           list.appendChild(el);
@@ -822,24 +560,15 @@
         if (withConfetti) confettiBurst();
       }
 
-      // =========================
-      // SOUND FX
-      // =========================
       let audioCtx;
 
       function ensureAudio() {
-        if (!audioCtx)
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         if (audioCtx.state === "suspended") audioCtx.resume();
         return audioCtx;
       }
 
-      function beep({
-        freq = 440,
-        dur = 0.08,
-        type = "sine",
-        gain = 0.06,
-      } = {}) {
+      function beep({ freq = 440, dur = 0.08, type = "sine", gain = 0.06 } = {}) {
         const ctx = ensureAudio();
         const o = ctx.createOscillator();
         const g = ctx.createGain();
@@ -861,10 +590,7 @@
 
       function clickSound() {
         beep({ freq: 660, dur: 0.05, type: "triangle", gain: 0.05 });
-        setTimeout(
-          () => beep({ freq: 990, dur: 0.06, type: "triangle", gain: 0.04 }),
-          30,
-        );
+        setTimeout(() => beep({ freq: 990, dur: 0.06, type: "triangle", gain: 0.04 }), 30);
       }
 
       function scanSoundTick(i) {
@@ -874,19 +600,10 @@
 
       function revealSound() {
         beep({ freq: 523.25, dur: 0.07, type: "sine", gain: 0.05 });
-        setTimeout(
-          () => beep({ freq: 659.25, dur: 0.07, type: "sine", gain: 0.05 }),
-          70,
-        );
-        setTimeout(
-          () => beep({ freq: 783.99, dur: 0.1, type: "sine", gain: 0.05 }),
-          140,
-        );
+        setTimeout(() => beep({ freq: 659.25, dur: 0.07, type: "sine", gain: 0.05 }), 70);
+        setTimeout(() => beep({ freq: 783.99, dur: 0.1, type: "sine", gain: 0.05 }), 140);
       }
 
-      // =========================
-      // CONFETTI
-      // =========================
       const confetti = {
         canvas: null,
         ctx: null,
@@ -975,9 +692,7 @@
           ctx.restore();
         }
 
-        confetti.pieces = confetti.pieces.filter(
-          (p) => p.life > 0 && p.y < h + 60,
-        );
+        confetti.pieces = confetti.pieces.filter((p) => p.life > 0 && p.y < h + 60);
 
         if (confetti.pieces.length) {
           confetti.raf = requestAnimationFrame(confettiTick);
@@ -988,9 +703,6 @@
         }
       }
 
-      // =========================
-      // SCANNER
-      // =========================
       async function runScanner() {
         $("scanner").classList.remove("hidden");
         $("resultWrap").classList.add("hidden");
@@ -1011,8 +723,7 @@
           pct = Math.min(100, pct + randInt(3, 7));
           $("scanBar").style.width = pct + "%";
           $("scanPct").textContent = pct + "%";
-          $("scanHint").textContent =
-            hints[Math.min(hints.length - 1, Math.floor(pct / 25))];
+          $("scanHint").textContent = hints[Math.min(hints.length - 1, Math.floor(pct / 25))];
           scanSoundTick(i);
           await sleep(randInt(45, 85));
         }
@@ -1046,9 +757,6 @@
         $("scanner").classList.add("hidden");
       }
 
-      // =========================
-      // MAIN
-      // =========================
       async function guess({ again = false } = {}) {
         const name = $("nameInput").value.trim();
         const birthDateRaw = $("birthDateInput").value.trim();
@@ -1082,13 +790,7 @@
         if (again) await runScannerFast();
         else await runScanner();
 
-        const { kodam, level } = pickKodam(
-          name,
-          birthDate,
-          birthMonth,
-          zodiac,
-          mode,
-        );
+        const { kodam, level } = pickKodam(name, birthDate, birthMonth, zodiac, mode);
         const meta = levelMeta(level);
         const birthLabel = `${birthDate} ${getMonthName(birthMonth)}`;
 
@@ -1186,7 +888,6 @@ Siapa kodam kamu? Coba juga 😆
         showToast("Riwayat direset.");
       }
 
-      // INIT
       $("btnGuess").addEventListener("click", () => guess({ again: false }));
       $("btnAgain").addEventListener("click", () => guess({ again: true }));
       $("btnShare").addEventListener("click", share);
